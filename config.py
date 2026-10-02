@@ -15,6 +15,6 @@ ALLOWED_USER_ID = int(os.getenv("ALLOWED_USER_ID", "0"))
 if not ALLOWED_USER_ID:
     raise RuntimeError("ALLOWED_USER_ID is not set")
 
-TRENDEN_URL = os.getenv("TRENDEN_URL", "").rstrip("/")
-if not TRENDEN_URL:
-    raise RuntimeError("TRENDEN_URL is not set")
+TREN_DEN_URL = os.getenv("TREN_DEN_URL", "").rstrip("/")
+if not TREN_DEN_URL:
+    raise RuntimeError("TREN_DEN_URL is not set")
