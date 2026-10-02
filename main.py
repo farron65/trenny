@@ -4,9 +4,7 @@ from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
 
 import os, sys
 
-from dotenv import load_dotenv
-
-load_dotenv()
+from config import BOT_TOKEN
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -15,7 +13,6 @@ logging.basicConfig(
 
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
 if not BOT_TOKEN:
     sys.exit("BOT_TOKEN is not set. Add it to your .env file.")
 
