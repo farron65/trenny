@@ -2,7 +2,7 @@ import logging
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, filters
 
-from trenden_client import import_workout
+from trenden_client import import_workout, is_awake, wait_for_trenden
 
 import sys
 
@@ -26,10 +26,19 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Hi! I'm Trenny")
     
 async def post_workout(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.message is None:
+    if update.message is None or update.message.text is None:
         return
-    if update.message.text is None:
-        return
+    
+    if not await is_awake():
+        await update.message.reply_text(
+            "Trenden is waking up, this can take a couple of minutes...⌛"
+        )
+        if not await wait_for_trenden():
+            await update.message.reply_text(
+                "Trenden isn't responding. Check render."
+            )
+            return
+    
     await update.message.reply_text(await import_workout(update.message.text))
     
 if __name__ == '__main__':
