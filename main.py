@@ -6,6 +6,8 @@ from trenden_client import import_workout, is_awake, wait_for_trenden
 
 import sys
 
+import re
+
 from config import BOT_TOKEN, ALLOWED_USER_ID
 
 logging.basicConfig(
@@ -20,6 +22,11 @@ if not BOT_TOKEN:
 
 only_me = filters.User(user_id=ALLOWED_USER_ID)
 
+SET_LINE = re.compile(r"^Set \d+:", re.MULTILINE)
+
+def looks_like_workout(text: str) -> bool:
+    return "\n" in text and bool(SET_LINE.search(text))
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.message is None:
         return
@@ -27,6 +34,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
 async def post_workout(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.message is None or update.message.text is None:
+        return
+    
+    if not looks_like_workout(update.message.text):
+        await update.message.reply_text("That doesn't look like a Strong workout.")
         return
     
     if not await is_awake():
