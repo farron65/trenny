@@ -1,6 +1,6 @@
 # Trenny 
 
-A Telegram bot taht sends my workouts to [TrenDen](https://github.com/farron65/tren-den).
+A Telegram bot that sends my workouts to [TrenDen](https://github.com/farron65/tren-den).
 I copy a workout from the Strong app, paste it to the bot, and it lands in Trenden. 
 No more opening the site, clicking import, pasting, and submitting.
 
