@@ -48,7 +48,7 @@ docker build -t trenny .
 docker run --rm --env-file .env trenny
 ```
  
-If the backend runs on your machine and the bot runs in Docker, set `TRENDEN_URL=http://host.docker.internal:8000`.
+If the backend runs on your machine and the bot runs in Docker, set `TREN_DEN_URL=http://host.docker.internal:8000`.
  
 ## Usage
  
